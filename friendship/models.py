@@ -18,7 +18,7 @@ from friendship.signals import (
     followee_created, followee_removed, following_created, following_removed
 )
 
-AUTH_USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
+AUTH_USER_MODEL = getattr(settings, 'FRIENDSHIP_USER_MODEL', 'auth.User')
 
 CACHE_TYPES = {
     'friends': 'f-%s',
