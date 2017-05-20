@@ -299,19 +299,14 @@ class FriendshipManager(models.Manager):
 
         return request
 
-    def remove_friend(self, from_user, to_user):
+    def remove_friend(self, from_user_id, to_user_id):
         """ Destroy a friendship relationship """
         try:
-            qs = Friend.objects.filter(to_user=to_user, from_user=from_user)
+            qs = Friend.objects.filter(to_user=to_user_id, from_user=from_user_id)
 
             if qs:
-                friendship_removed.send(
-                    sender=qs[0],
-                    from_user=from_user,
-                    to_user=to_user
-                )
                 qs.delete()
-                bust_cache('friends', to_user.pk)
+                bust_cache('friends', to_user_id)
                 return True
             else:
                 return False
